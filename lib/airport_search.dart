@@ -1,4 +1,4 @@
-import 'package:untitled2/models/airport.dart';
+/*import 'package:untitled2/models/airport.dart';
 
 class AirportLookup {
   AirportLookup({required this.airports});
@@ -30,4 +30,4 @@ class AirportLookup {
           airport.country.toLowerCase().contains(string);
     }).toList();
   }
-}
+}*/

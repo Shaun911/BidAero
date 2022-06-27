@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:untitled2/models/airport.dart';
 import 'package:untitled2/pages/homePage.dart';
 import 'package:untitled2/firebase_options.dart';
 import 'package:untitled2/pages/searchPage.dart';
@@ -11,7 +12,7 @@ import 'package:untitled2/src/widgets.dart';
 import 'package:untitled2/src/authentication.dart';
 import 'package:untitled2/api_service.dart';
 import 'package:intl/intl.dart';
-import 'package:untitled2/models/flight.dart';
+import 'package:untitled2/models/airport.dart';
 
 /*class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -187,40 +188,183 @@ class _HomePageState extends State<HomePage> {
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 24),
-                          child: TextFormField(
-                            controller: originAirportController,
-                            decoration: const InputDecoration(
+                          child: Autocomplete<Airport>(
+                            optionsBuilder: (TextEditingValue value) {
+                              return airports
+                                  .where((airport) => airport.city
+                                      .toLowerCase()
+                                      .startsWith(value.text.toLowerCase()))
+                                  .toList();
+                            },
+                            displayStringForOption: (airport) =>
+                                airport.city + ", " + airport.airportCode,
+                            fieldViewBuilder: (
+                            BuildContext context,
+                                TextEditingController ctrl,
+                                FocusNode focus,
+                                VoidCallback onField
+                            ) {
+                              return TextFormField(
+                              controller: ctrl,
+                              focusNode: focus,
+                              decoration: const InputDecoration(
                               icon: Icon(Icons.flight_takeoff_rounded,
-                                  color: Colors.black),
+                              color: Colors.black),
                               labelText: 'Origin Airport',
                               hintText: 'Enter your origin airport code',
-                            ),
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return 'Origin airport not valid';
-                              }
-                              return null;
+                              ),
+                                validator: (value) {
+                                  if (value!.isEmpty) {
+                                    return 'Origin airport not valid';
+                                  }
+                                  return null;
+                                },
+                              );
                             },
-                          ),
-                        ),
+                            onSelected: (airport) {
+                              originAirportController.text = airport.airportCode;
+                            },
+                            optionsViewBuilder: (BuildContext context,
+                                AutocompleteOnSelected<Airport> onSelected,
+                                Iterable<Airport> options) {
+                              return Align(
+                                alignment: Alignment.topLeft,
+                                child: Material(
+                                  child: Container(
+                                    width: 450,
+                                    color: Colors.lightBlue,
+                                    child: ListView.builder(
+                                      padding: EdgeInsets.all(10),
+                                      itemCount: options.length,
+                                      itemBuilder:
+                                          (BuildContext context, int index) {
+                                            final Airport option =
+                                            options.elementAt(index);
+                                            return GestureDetector(
+                                              onTap: () {
+                                                onSelected(option);
+                                              },
+                                              child: ListTile(
+                                                title:
+                                                Row(
+                                                  children: [
+                                                    Text(
+                                                        option.city +
+                                                            ", " +
+                                                            option.country,
+                                                        style: TextStyle(
+                                                            color: Colors.white,
+                                                            fontSize: 18)),
+                                                    SizedBox(width: 15),
+                                                    option.flags,
+                                                  ],
+                                                ),
+                                                subtitle: Text(
+                                                    option.name +
+                                                        ", " +
+                                                        option.airportCode,
+                                                    style: TextStyle(
+                                                        color: Colors.white, fontSize: 15)),
+                                              ),
+                                            );
+                                          },
+                                            ),
+                                            ),
+                                            ),
+                                        );
+                                      },
+                                    ),
+                                  ),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 24),
-                          child: TextFormField(
-                            controller: destinationAirportController,
-                            decoration: const InputDecoration(
-                              icon:
-                                  Icon(Icons.flight_land_rounded, color: Colors.black),
-                              labelText: "Destination Aiport",
-                              hintText: 'Enter your destination airport code ',
-                            ),
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return 'Destination airport not valid';
-                              }
-                              return null;
+                          child: Autocomplete<Airport>(
+                            optionsBuilder: (TextEditingValue value) {
+                              return airports
+                                  .where((airport) => airport.city
+                                  .toLowerCase()
+                                  .startsWith(value.text.toLowerCase()))
+                                  .toList();
+                            },
+                            displayStringForOption: (airport) =>
+                            airport.city + ", " + airport.airportCode,
+                            fieldViewBuilder: (
+                                BuildContext context,
+                                TextEditingController ctrl,
+                                FocusNode focus,
+                                VoidCallback onField
+                                ) {
+                              return TextFormField(
+                                controller: ctrl,
+                                focusNode: focus,
+                                decoration: const InputDecoration(
+                                  icon: Icon(Icons.flight_land_rounded,
+                                      color: Colors.black),
+                                  labelText: 'Destination Airport',
+                                  hintText: 'Enter your destination airport code',
+                                ),
+                                validator: (value) {
+                                  if (value!.isEmpty) {
+                                    return 'Destination airport not valid';
+                                  }
+                                  return null;
+                                },
+                              );
+                            },
+                            onSelected: (airport) {
+                              destinationAirportController.text = airport.airportCode;
+                            },
+                            optionsViewBuilder: (BuildContext context,
+                                AutocompleteOnSelected<Airport> onSelected,
+                                Iterable<Airport> options) {
+                              return Align(
+                                alignment: Alignment.topLeft,
+                                child: Material(
+                                  child: Container(
+                                    width: 450,
+                                    color: Colors.lightBlue,
+                                    child: ListView.builder(
+                                      padding: EdgeInsets.all(10),
+                                      itemCount: options.length,
+                                      itemBuilder:
+                                          (BuildContext context, int index) {
+                                        final Airport option =
+                                        options.elementAt(index);
+                                        return GestureDetector(
+                                          onTap: () {
+                                            onSelected(option);
+                                          },
+                                          child: ListTile(
+                                            title:
+                                            Row(
+                                              children: [
+                                                Text(
+                                                    option.city +
+                                                        ", " +
+                                                        option.country,
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 18)),
+                                                SizedBox(width: 15),
+                                                option.flags,
+                                              ],
+                                            ),
+                                            subtitle: Text(
+                                                option.name +
+                                                    ", " +
+                                                    option.airportCode,
+                                                style: TextStyle(
+                                                    color: Colors.white, fontSize: 15)),
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                ),
+                              );
                             },
                           ),
                         ),
+
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 16),
                           child: Row(
@@ -232,7 +376,8 @@ class _HomePageState extends State<HomePage> {
                                   if (_formKey.currentState!.validate()) {
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       const SnackBar(
-                                          content: Text('Searching for flights')),
+                                          content:
+                                              Text('Searching for flights')),
                                     );
                                     Navigator.push(
                                         context,
@@ -252,7 +397,8 @@ class _HomePageState extends State<HomePage> {
                                                         .text)));
                                   }
                                 },
-                                child: const Text('NEXT', style: TextStyle(color: Colors.white)),
+                                child: const Text('NEXT',
+                                    style: TextStyle(color: Colors.white)),
                               ),
                               const SizedBox(width: 30),
                             ],

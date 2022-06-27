@@ -43,6 +43,7 @@ dependencies:
   http: ^0.13.4
   date_time_picker: ^2.1.0
   intl: ^0.17.0
+  country_icons: ^2.0.2
 
 dev_dependencies:
   flutter_test:

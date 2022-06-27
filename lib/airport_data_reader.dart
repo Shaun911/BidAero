@@ -1,7 +1,7 @@
 import 'package:untitled2/models/airport.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
-class AirportDataReader {
+/*class AirportDataReader {
   static Future<List<Airport>> load(String path) async {
     final data = await rootBundle.loadString(path);
     return data.split('\n')
@@ -9,4 +9,4 @@ class AirportDataReader {
         .where((airport) => airport != null)
         .toList();
   }
-}
+}*/
