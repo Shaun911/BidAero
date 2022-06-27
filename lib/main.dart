@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:untitled2/pages/errorPage.dart';
 import 'package:untitled2/pages/homePage.dart';
 import 'package:untitled2/pages/welcomePage.dart';
 import 'firebase_options.dart';
@@ -40,6 +41,7 @@ class App extends StatelessWidget {
       routes: {
         "welcomePage": (context) => WelcomePage(),
         "homePage": (context) => HomePage(),
+        "errorPage": (context) => ErrorPage()
 
       },
     );

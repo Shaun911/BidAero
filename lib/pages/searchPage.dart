@@ -10,6 +10,9 @@ import 'package:untitled2/firebase_options.dart';
 import 'package:untitled2/src/widgets.dart';
 import 'package:untitled2/src/authentication.dart';
 import 'package:untitled2/api_service.dart';
+import 'dart:async';
+
+import 'errorPage.dart';
 
 class SearchPage extends StatefulWidget {
   final String departureDate;
@@ -30,7 +33,8 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
-  late Flight _userModel;
+  late Flight? _userModel;
+  late Timer time;
   List<FlightElement>? _model = [];
   @override
   void initState() {
@@ -53,9 +57,14 @@ class _SearchPageState extends State<SearchPage> {
     });
 
     _userModel = (await ApiService(requestHeaders: requestHeaders, data: data)
-        .getUsers())!;
-    _model = _userModel.data.response.flights;
-    Future.delayed(const Duration(seconds: 1)).then((value) => setState(() {}));
+        .getUsers());
+    if (_userModel == null) {
+      Navigator.pushAndRemoveUntil<void>(context, MaterialPageRoute<void>(builder: (BuildContext context) => ErrorPage()), ModalRoute.withName("homePage"));
+    } else {
+      _model = _userModel!.data.response.flights;
+      Future.delayed(const Duration(seconds: 1)).then((value) =>
+          setState(() {}));
+    }
   }
 
   @override
@@ -71,7 +80,8 @@ class _SearchPageState extends State<SearchPage> {
                 Icon(IconData(0xf54b, fontFamily: 'MaterialIcons'),
                     size: 25, color: Colors.white)
               ]))),
-      body: _model!.isEmpty
+      body: _model == null ? const Center(child: Text("Flight not found"))
+      : _model!.isEmpty
           ? const Center(child: CircularProgressIndicator())
           : SafeArea(
               child: Container(
@@ -79,7 +89,7 @@ class _SearchPageState extends State<SearchPage> {
                   itemCount: _model?.length,
                   itemBuilder: (context, index) {
                     print(_model?.length);
-                    print(_userModel.data.response.numberOfFlights);
+                    print(_userModel!.data.response.numberOfFlights);
                     return Card(
                       child: Column(
                         children: [
