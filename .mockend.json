@@ -1,0 +1,14 @@
+{ 
+ "origin": {
+        "airportCode": "SIN",
+        "airportName": "Changi Intl",
+        "cityCode": "SIN",
+        "cityName": "Singapore"
+      },
+      "destination": {
+        "airportCode": "BKK",
+        "airportName": "Suvarnabhumi Airport",
+        "cityCode": "BKK",
+        "cityName": "Bangkok"
+      }
+}
