@@ -1,4 +1,5 @@
 { 
+ "flight": {
  "origin": {
         "airportCode": "SIN",
         "airportName": "Changi Intl",
@@ -11,4 +12,5 @@
         "cityCode": "BKK",
         "cityName": "Bangkok"
       }
+ }
 }
