@@ -2,17 +2,6 @@
  "Flight": {
  "origin": {
   "string": {
-        "airportCode": "SIN",
-        "airportName": "Changi Intl",
-        "cityCode": "SIN",
-        "cityName": "Singapore"
-       }},
-      "destination": {
-       "string": {
-        "airportCode": "BKK",
-        "airportName": "Suvarnabhumi Airport",
-        "cityCode": "BKK",
-        "cityName": "Bangkok"
-      }}
+        "airportCode": "SIN"}
  }
 }
