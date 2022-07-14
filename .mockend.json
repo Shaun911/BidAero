@@ -1,8 +1,146 @@
 { 
  "Flight": {
-  "origin": {
-   "string": ["SIN"
-    ]
+  "flightNumber": {
+   "string": ["SQ710",
+              "SQ114",
+              "SQ210",
+              "SQ112",
+              "SQ64",
+              "SQ747",
+              "SQ833"]
+  },
+  "originCity": {
+   "string": ["Singapore, SIN"
+              ]
+  },
+  "destinationCity": {
+   "string": ["Kuala Lumpur, KUL",
+              "Bangkok, BKK",
+              "Jakarta, CGK",
+              "Tokyo, NRT",
+              "Tokyo, HND",
+              "Penang, PEN",
+              "Bandung, BDO",
+              "Bandar Seri Begawan, BWN",
+              "Cebu, CEB",
+              "Da Nang, DAD",
+              "Davao, DVO",
+              "Denpasar Bali, DPS",
+              "Hanoi, HAN",
+              "Ho Chi Minh City, SGN",
+              "Mandalay City, MDL",
+              "Manila, MNL",
+              "Medan, KNO",
+              "Phnom Penh, PNH",
+              "Phuket, HKT",
+              "Siem Reap, REP",
+              "Surabaya, SUB",
+              "Yangon, RGN",
+              "Beijing, PEK",
+              "Busan, PUS",
+              "Chengdu, CTU",
+              "Chong Qing, CKG",
+              "Fukuoka, FUK",
+              "Guangzhou, CAN",
+              "Hong Kong, HKG",
+              "Nagoya, NGO",
+              "Osaka, KIX",
+              "Seoul, ICN",
+              "Shanghai, PVG",
+              "Shenzhen, SZX",
+              "Taipei, TPE",
+              "Xiamen, XMN",
+              "Ahmedabad, AMD",
+              "Bengaluru, BLR",
+              "Cape Town, CPT",
+              "Chennai, MAA",
+              "Colombo, CMB",
+              "Dhaka, DAC",
+              "Dubai, DXB",
+              "Hyderabad, HYD",
+              "Johannesburg, JNB",
+              "Kathmandu, KTM",
+              "Kochi, COK",
+              "Kolkata, CCU",
+              "Male, MLE",
+              "Mumbai, BOM",
+              "Delhi, DEL",
+              "Adelaide, ADL",
+              "Auckland, AKL",
+              "Brisbane, BNE",
+              "Cairns, CNS",
+              "Christchurch, CHC",
+              "Darwin, DRW",
+              "Melbourne, MEL",
+              "Perth, PER",
+              "Sydney, SYD",
+              "Amsterdam, AMS",
+              "Barcelona, BCN",
+              "Copenhagen, CPH",
+              "Frankfurt, FRA",
+              "Istanbul, IST",
+              "London, LHR",
+              "Manchester, MAN",
+              "Milan, MXP",
+              "Moscow, DME",
+              "Munich, MUC",
+              "Paris, CDG",
+              "Rome, FCO",
+              "Zurich, ZRH",
+              "Houston, IAH",
+              "Los Angeles, LAX",
+              "New York, JFK",
+              "New York, EWR",
+              "San Francisco, SFO",
+              "Seattle, SEA",
+              "Vancouver, YVR"]
+  },
+  "flightStatus": {
+   "string": ["On scheduled",
+              "Delayed",
+              "Arrived",
+              "Departed",
+              "Arrived Late",
+              "Arrived Early"]
+ },
+  "scheduledDeprature": {
+   	"dateTime": {
+      "min": "2022-07-01T00:00:00Z",
+      "max": "2022-07-31T23:59:59Z"
+   }
+ },
+ "scheduledArrival": {
+  "dateTime": {
+      "min": "2022-07-01T00:00:00Z",
+      "max": "2022-07-31T23:59:59Z"
+   }
+ },
+ "originAirportTerminal": {
+  "int": [1,
+          2,
+          3]
+ },
+  "originAIrportGate": {
+    "string": ["A3",
+               "B4",
+               "A2",
+           "B18",
+           "C6",
+           "C7",
+           "D8",
+           "D9",
+           "E10",
+           "E11",
+           "F12", 
+           "F13",
+           "G14",
+           "G15"]
+  },
+  "destinationAirportTerminal": {
+   "int": [1]
   }
  }
-}
+ 
+            
+  
+  
