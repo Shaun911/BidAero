@@ -1,7 +1,8 @@
 { 
  "Flight": {
   "origin": {
-   "string": "SIN"
+   "string": ["SIN"
+    ]
+  }
  }
-}
 }
