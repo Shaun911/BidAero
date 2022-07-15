@@ -209,38 +209,3 @@ class _SearchPageState extends State<SearchPage> {
   }
 }
 
-/*class MainPage extends StatelessWidget {
-  const MainPage({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar:
-          AppBar(title: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16),
-              child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                const Text('WELCOME',
-                    style: TextStyle(color: Colors.white, fontSize: 20)),
-                SizedBox(width: 15),
-                Icon(IconData(0xf02d6, fontFamily: 'MaterialIcons'), size: 20, color: Colors.white)
-              ]))),
-      body: SafeArea(
-        child: Center(
-          child: Container(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[Text("how are you"), Text("fuck off"),
-              ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, "a");
-                  },
-                  child: Text("Next"))
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
-*/
