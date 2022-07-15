@@ -103,7 +103,7 @@
               "Arrived Late",
               "Arrived Early"]
   },
-  "scheduledDeprature": {
+  "scheduledDeparture": {
    	"dateTime": {
       "min": "2022-07-01T00:00:00Z",
       "max": "2022-07-31T23:59:59Z"
