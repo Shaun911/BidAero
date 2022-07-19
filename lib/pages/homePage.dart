@@ -32,7 +32,7 @@ class _HomePageState extends State<HomePage> {
   final destinationAirportController = TextEditingController();
   final arrivalDateController = TextEditingController();
   final _formKey = GlobalKey<FormState>(debugLabel: '_HomePageState');
-  final _saved = <Mockend>{};
+  final _saved = <Mockend>[];
 
   @override
   void initState() {
@@ -55,14 +55,14 @@ class _HomePageState extends State<HomePage> {
                   size: 20, color: Colors.white)
             ])),
         actions: [
-          IconButton(icon: Icon(Icons.list), onPressed: _pushSavedFlight)
+          IconButton(icon: Icon(Icons.list), iconSize: 20, color: Colors.white, onPressed: _pushSavedFlight)
         ],),
       body: SafeArea(
         child: Center(
           child: Container(
             child: Column(
               children: [
-                const Header('Search Flights'),
+                const Header('Search For Flights'),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Form(

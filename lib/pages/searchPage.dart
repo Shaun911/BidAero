@@ -21,7 +21,7 @@ class SearchPage extends StatefulWidget {
   final String originAirport;
   final String destinationAirport;
   final String? arrivalDate;
-  final Set<Mockend> saved;
+  final List<Mockend> saved;
 
   const SearchPage(
       {Key? key,
@@ -40,11 +40,11 @@ class _SearchPageState extends State<SearchPage> {
 
   late Timer time;
   late List<Mockend>? _model = [];
-  late Set<Mockend> save;
+
 
   @override
   void initState() {
-    save = widget.saved;
+
     super.initState();
     _getData();
   }
@@ -54,7 +54,7 @@ class _SearchPageState extends State<SearchPage> {
         destination: widget.destinationAirport,
         departureDate: widget.departureDate,
         arrivalDate: widget.arrivalDate).getUsers())!;
-    if (_model == null) {
+    if (_model!.isEmpty) {
       Navigator.pushAndRemoveUntil<void>(context, MaterialPageRoute<void>(
           builder: (BuildContext context) => ErrorPage()),
           ModalRoute.withName("homePage"));
@@ -78,7 +78,7 @@ class _SearchPageState extends State<SearchPage> {
                     size: 25, color: Colors.white)
               ])),
         actions: [
-          IconButton(icon: Icon(Icons.list), onPressed: _pushSavedFlight)
+          IconButton(icon: Icon(Icons.list), iconSize: 20, color: Colors.white, onPressed: _pushSavedFlight)
         ],),
       body: _model == null ? const Center(child: Text("Flight not found"))
           : _model!.isEmpty
@@ -88,7 +88,7 @@ class _SearchPageState extends State<SearchPage> {
           child: ListView.builder(
               itemCount: _model?.length,
               itemBuilder: (context, index) {
-                final alreadySaved = save.contains(_model![index]);
+                final alreadySaved = widget.saved.contains(_model![index]);
                 return Card(
                   child: Column(
                     children: [
@@ -197,9 +197,9 @@ class _SearchPageState extends State<SearchPage> {
                           onPressed: () {
                             setState(() {
                               if (alreadySaved) {
-                                save.remove(_model![index]);
+                                widget.saved.remove(_model![index]);
                               } else {
-                                save.add(_model![index]);
+                                widget.saved.add(_model![index]);
                               }
                             });
                           }
@@ -286,6 +286,6 @@ class _SearchPageState extends State<SearchPage> {
         context,
         MaterialPageRoute(
             builder: (context) =>
-                SavedPage(saved: save)));
+                SavedPage(saved: widget.saved)));
   }
 }
