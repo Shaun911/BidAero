@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:untitled2/models/airport.dart';
 import 'package:untitled2/pages/homePage.dart';
 import 'package:untitled2/firebase_options.dart';
+import 'package:untitled2/pages/savedPage.dart';
 import 'package:untitled2/pages/searchPage.dart';
 import 'package:untitled2/src/widgets.dart';
 import 'package:untitled2/src/authentication.dart';
@@ -14,42 +15,9 @@ import 'package:untitled2/api_service.dart';
 import 'package:intl/intl.dart';
 import 'package:untitled2/models/airport.dart';
 
-/*class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
+import '../models/mockend.dart';
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar:
-      AppBar(title: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 16),
-          child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-            const Text('WELCOME',
-                style: TextStyle(color: Colors.white, fontSize: 20)),
-            SizedBox(width: 15),
-            Icon(IconData(0xf02d6, fontFamily: 'MaterialIcons'), size: 20, color: Colors.white)
-          ]))),
-      body: SafeArea(
-        child: Center(
-          child: Container(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[Text("how are you"), Text("fuck off"),
-                ElevatedButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, "a");
-                    },
-                    child: Text("Next"))
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
 
-*/
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -64,11 +32,12 @@ class _HomePageState extends State<HomePage> {
   final destinationAirportController = TextEditingController();
   final arrivalDateController = TextEditingController();
   final _formKey = GlobalKey<FormState>(debugLabel: '_HomePageState');
+  final _saved = <Mockend>{};
 
   @override
   void initState() {
     departureDateController.text = "";
-    arrivalDateController.text = "";
+    //arrivalDateController.text = "";
     super.initState();
   }
 
@@ -76,15 +45,18 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16),
-              child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                const Text('WELCOME',
-                    style: TextStyle(color: Colors.white, fontSize: 20)),
-                SizedBox(width: 15),
-                Icon(IconData(0xf02d6, fontFamily: 'MaterialIcons'),
-                    size: 20, color: Colors.white)
-              ]))),
+        title: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 16),
+            child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+              const Text('WELCOME',
+                  style: TextStyle(color: Colors.white, fontSize: 20)),
+              SizedBox(width: 15),
+              Icon(IconData(0xf02d6, fontFamily: 'MaterialIcons'),
+                  size: 20, color: Colors.white)
+            ])),
+        actions: [
+          IconButton(icon: Icon(Icons.list), onPressed: _pushSavedFlight)
+        ],),
       body: SafeArea(
         child: Center(
           child: Container(
@@ -119,10 +91,17 @@ class _HomePageState extends State<HomePage> {
                               DateTime? departureDate = await showDatePicker(
                                   context: context,
                                   initialDate: DateTime.now(),
-                                  firstDate: DateTime.now()
-                                      .subtract(Duration(days: 3)),
+                                  firstDate: DateTime(DateTime
+                                      .now()
+                                      .year, DateTime
+                                      .now()
+                                      .month, 1),
                                   lastDate:
-                                      DateTime.now().add(Duration(days: 3)),
+                                  DateTime(DateTime
+                                      .now()
+                                      .year, DateTime
+                                      .now()
+                                      .month + 1, 0),
                                   builder: (context, child) {
                                     return Theme(
                                       data: Theme.of(context).copyWith(
@@ -164,7 +143,8 @@ class _HomePageState extends State<HomePage> {
                                   context: context,
                                   initialDate: date,
                                   firstDate: date,
-                                  lastDate: date.add(Duration(days: 1)),
+                                  lastDate: DateTime(
+                                      date.year, date.month + 1, 0),
                                   builder: (context, child) {
                                     return Theme(
                                       data: Theme.of(context).copyWith(
@@ -191,28 +171,27 @@ class _HomePageState extends State<HomePage> {
                           child: Autocomplete<Airport>(
                             optionsBuilder: (TextEditingValue value) {
                               return airports
-                                  .where((airport) => airport.city
+                                  .where((airport) =>
+                                  airport.city
                                       .toLowerCase()
                                       .startsWith(value.text.toLowerCase()))
                                   .toList();
                             },
                             displayStringForOption: (airport) =>
-                                airport.city + ", " + airport.airportCode,
-                            fieldViewBuilder: (
-                            BuildContext context,
+                            airport.city + ", " + airport.airportCode,
+                            fieldViewBuilder: (BuildContext context,
                                 TextEditingController ctrl,
                                 FocusNode focus,
-                                VoidCallback onField
-                            ) {
+                                VoidCallback onField) {
                               return TextFormField(
-                              controller: ctrl,
-                              focusNode: focus,
-                              decoration: const InputDecoration(
-                              icon: Icon(Icons.flight_takeoff_rounded,
-                              color: Colors.black),
-                              labelText: 'Origin Airport',
-                              hintText: 'Enter your origin airport code',
-                              ),
+                                controller: ctrl,
+                                focusNode: focus,
+                                decoration: const InputDecoration(
+                                  icon: Icon(Icons.flight_takeoff_rounded,
+                                      color: Colors.black),
+                                  labelText: 'Origin Airport',
+                                  hintText: 'Enter your origin airport code',
+                                ),
                                 validator: (value) {
                                   if (value!.isEmpty) {
                                     return 'Origin airport not valid';
@@ -222,96 +201,7 @@ class _HomePageState extends State<HomePage> {
                               );
                             },
                             onSelected: (airport) {
-                              originAirportController.text = airport.airportCode;
-                            },
-                            optionsViewBuilder: (BuildContext context,
-                                AutocompleteOnSelected<Airport> onSelected,
-                                Iterable<Airport> options) {
-                              return Align(
-                                alignment: Alignment.topLeft,
-                                child: Material(
-                                  child: Container(
-                                    width: 450,
-                                    color: Colors.lightBlue,
-                                    child: ListView.builder(
-                                      padding: EdgeInsets.all(10),
-                                      itemCount: options.length,
-                                      itemBuilder:
-                                          (BuildContext context, int index) {
-                                            final Airport option =
-                                            options.elementAt(index);
-                                            return GestureDetector(
-                                              onTap: () {
-                                                onSelected(option);
-                                              },
-                                              child: ListTile(
-                                                title:
-                                                Row(
-                                                  children: [
-                                                    Text(
-                                                        option.city +
-                                                            ", " +
-                                                            option.country,
-                                                        style: TextStyle(
-                                                            color: Colors.white,
-                                                            fontSize: 18)),
-                                                    SizedBox(width: 15),
-                                                    option.flags,
-                                                  ],
-                                                ),
-                                                subtitle: Text(
-                                                    option.name +
-                                                        ", " +
-                                                        option.airportCode,
-                                                    style: TextStyle(
-                                                        color: Colors.white, fontSize: 15)),
-                                              ),
-                                            );
-                                          },
-                                            ),
-                                            ),
-                                            ),
-                                        );
-                                      },
-                                    ),
-                                  ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 24),
-                          child: Autocomplete<Airport>(
-                            optionsBuilder: (TextEditingValue value) {
-                              return airports
-                                  .where((airport) => airport.city
-                                  .toLowerCase()
-                                  .startsWith(value.text.toLowerCase()))
-                                  .toList();
-                            },
-                            displayStringForOption: (airport) =>
-                            airport.city + ", " + airport.airportCode,
-                            fieldViewBuilder: (
-                                BuildContext context,
-                                TextEditingController ctrl,
-                                FocusNode focus,
-                                VoidCallback onField
-                                ) {
-                              return TextFormField(
-                                controller: ctrl,
-                                focusNode: focus,
-                                decoration: const InputDecoration(
-                                  icon: Icon(Icons.flight_land_rounded,
-                                      color: Colors.black),
-                                  labelText: 'Destination Airport',
-                                  hintText: 'Enter your destination airport code',
-                                ),
-                                validator: (value) {
-                                  if (value!.isEmpty) {
-                                    return 'Destination airport not valid';
-                                  }
-                                  return null;
-                                },
-                              );
-                            },
-                            onSelected: (airport) {
-                              destinationAirportController.text = airport.airportCode;
+                              originAirportController.text = airport.city;
                             },
                             optionsViewBuilder: (BuildContext context,
                                 AutocompleteOnSelected<Airport> onSelected,
@@ -353,7 +243,97 @@ class _HomePageState extends State<HomePage> {
                                                     ", " +
                                                     option.airportCode,
                                                 style: TextStyle(
-                                                    color: Colors.white, fontSize: 15)),
+                                                    color: Colors.white,
+                                                    fontSize: 15)),
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 24),
+                          child: Autocomplete<Airport>(
+                            optionsBuilder: (TextEditingValue value) {
+                              return airports
+                                  .where((airport) =>
+                                  airport.city
+                                      .toLowerCase()
+                                      .startsWith(value.text.toLowerCase()))
+                                  .toList();
+                            },
+                            displayStringForOption: (airport) =>
+                            airport.city + ", " + airport.airportCode,
+                            fieldViewBuilder: (BuildContext context,
+                                TextEditingController ctrl,
+                                FocusNode focus,
+                                VoidCallback onField) {
+                              return TextFormField(
+                                controller: ctrl,
+                                focusNode: focus,
+                                decoration: const InputDecoration(
+                                  icon: Icon(Icons.flight_land_rounded,
+                                      color: Colors.black),
+                                  labelText: 'Destination Airport',
+                                  hintText: 'Enter your destination airport code',
+                                ),
+                                validator: (value) {
+                                  if (value!.isEmpty) {
+                                    return 'Destination airport not valid';
+                                  }
+                                  return null;
+                                },
+                              );
+                            },
+                            onSelected: (airport) {
+                              destinationAirportController.text = airport.city;
+                            },
+                            optionsViewBuilder: (BuildContext context,
+                                AutocompleteOnSelected<Airport> onSelected,
+                                Iterable<Airport> options) {
+                              return Align(
+                                alignment: Alignment.topLeft,
+                                child: Material(
+                                  child: Container(
+                                    width: 450,
+                                    color: Colors.lightBlue,
+                                    child: ListView.builder(
+                                      padding: EdgeInsets.all(10),
+                                      itemCount: options.length,
+                                      itemBuilder:
+                                          (BuildContext context, int index) {
+                                        final Airport option =
+                                        options.elementAt(index);
+                                        return GestureDetector(
+                                          onTap: () {
+                                            onSelected(option);
+                                          },
+                                          child: ListTile(
+                                            title:
+                                            Row(
+                                              children: [
+                                                Text(
+                                                    option.city +
+                                                        ", " +
+                                                        option.country,
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 18)),
+                                                SizedBox(width: 15),
+                                                option.flags,
+                                              ],
+                                            ),
+                                            subtitle: Text(
+                                                option.name +
+                                                    ", " +
+                                                    option.airportCode,
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 15)),
                                           ),
                                         );
                                       },
@@ -377,23 +357,24 @@ class _HomePageState extends State<HomePage> {
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       const SnackBar(
                                           content:
-                                              Text('Searching for flights')),
+                                          Text('Searching for flights')),
                                     );
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) => SearchPage(
-                                                departureDate:
+                                            builder: (context) =>
+                                                SearchPage(
+                                                    departureDate:
                                                     departureDateController
                                                         .text,
-                                                originAirport:
+                                                    originAirport:
                                                     originAirportController
                                                         .text,
-                                                destinationAirport:
+                                                    destinationAirport:
                                                     destinationAirportController
                                                         .text,
-                                                arrivalDate:
-                                                    arrivalDateController
+                                                    saved: _saved,
+                                                    arrivalDate: arrivalDateController
                                                         .text)));
                                   }
                                 },
@@ -415,4 +396,14 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
-}
+    void _pushSavedFlight() {
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+                  SavedPage(saved: _saved)));
+    }
+
+    }
+
+

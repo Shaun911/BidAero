@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:untitled2/pages/errorPage.dart';
 import 'package:untitled2/pages/homePage.dart';
+import 'package:untitled2/pages/savedPage.dart';
 import 'package:untitled2/pages/welcomePage.dart';
 import 'firebase_options.dart';
 import 'package:untitled2/pages/searchPage.dart';
@@ -41,7 +42,7 @@ class App extends StatelessWidget {
       routes: {
         "welcomePage": (context) => WelcomePage(),
         "homePage": (context) => HomePage(),
-        "errorPage": (context) => ErrorPage()
+        "errorPage": (context) => ErrorPage(),
 
       },
     );

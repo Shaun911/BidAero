@@ -44,6 +44,8 @@ dependencies:
   date_time_picker: ^2.1.0
   intl: ^0.17.0
   country_icons: ^2.0.2
+  location: ^4.2.0
+  google_maps_flutter: ^0.5.11+1
 
 dev_dependencies:
   flutter_test:

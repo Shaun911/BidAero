@@ -1,4 +1,4 @@
-import 'dart:html';
+
 import 'dart:math';
 import 'dart:ui';
 import 'package:flutter/material.dart';
@@ -28,6 +28,7 @@ class Airport {
 }
 
 List<Airport> airports = <Airport>[
+  Airport(name: "Changi", city: "Singapore", country: "Singapore", airportCode: "SIN", flags: Image.asset('icons/flags/png/sg.png', package: "country_icons", height: 30 , width: 30)),
   Airport(name: "Suvarnabhumi Airport", city: "Bangkok", country: "Thailand", airportCode: "BKK", flags: Image.asset('icons/flags/png/th.png', package: "country_icons", height: 30 , width: 30)),
   Airport(name: "Kuala Lumpur Intl", city: "Kuala Lumpur", country: "Malaysia", airportCode: "KUL", flags: Image.asset('icons/flags/png/my.png', package: "country_icons", height: 30 , width: 30)),
   Airport(name: "Penang Intl", city: "Penang", country: "Malaysia", airportCode: "PEN", flags: Image.asset('icons/flags/png/my.png', package: "country_icons", height: 30 , width: 30)),
@@ -46,7 +47,6 @@ Airport(name: "Kuala Namu Intl", city: "Medan", country: "Indonesia", airportCod
 Airport(name: "Pochentong", city: "Phnom Penh", country: "Cambodia", airportCode: "PNH", flags: Image.asset('icons/flags/png/kh.png', package: "country_icons", height: 30 , width: 30)),
   Airport(name: "Phuket Intl", city: "Phuket", country: "Thailand", airportCode: "HKT", flags: Image.asset('icons/flags/png/th.png', package: "country_icons", height: 30 , width: 30)),
   Airport(name: "Siem Reap", city: "Siem Reap", country: "Cambodia", airportCode: "REP", flags: Image.asset('icons/flags/png/kh.png', package: "country_icons", height: 30 , width: 30)),
-  Airport(name: "Changi", city: "Singapore", country: "Singapore", airportCode: "SIN", flags: Image.asset('icons/flags/png/sg.png', package: "country_icons", height: 30 , width: 30)),
   Airport(name: "Juanda Intl", city: "Surabaya", country: "Indonesia", airportCode: "SUB", flags: Image.asset('icons/flags/png/id.png', package: "country_icons", height: 30 , width: 30)),
   Airport(name: "Yangon Intl", city: "Yangon", country: "Myanmar", airportCode: "RGN", flags: Image.asset('icons/flags/png/mm.png', package: "country_icons", height: 30 , width: 30)),
   Airport(name: "Capital", city: "Beijing", country: "China", airportCode: "PEK", flags: Image.asset('icons/flags/png/cn.png', package: "country_icons", height: 30 , width: 30)),
@@ -88,7 +88,8 @@ Airport(name: "Pochentong", city: "Phnom Penh", country: "Cambodia", airportCode
   Airport(name: "Darwin", city: "Darwin", country: "Australia", airportCode: "DRW", flags: Image.asset('icons/flags/png/au.png', package: "country_icons", height: 30 , width: 30)),
   Airport(name: "Melbourne Intl", city: "Melbourne", country: "Australia", airportCode: "MEL", flags: Image.asset('icons/flags/png/au.png', package: "country_icons", height: 30 , width: 30)),
   Airport(name: "Perth Intl", city: "Perth", country: "Australia", airportCode: "PER", flags: Image.asset('icons/flags/png/au.png', package: "country_icons", height: 30 , width: 30)),
-  Airport(name: "Kingsford Smith", city: "Sydney", country: "Netherlands", airportCode: "AMS", flags: Image.asset('icons/flags/png/nl.png', package: "country_icons", height: 30 , width: 30)),
+  Airport(name: "Kingsford Smith", city: "Sydney", country: "Australia", airportCode: "SYD", flags: Image.asset('icons/flags/png/au.png', package: "country_icons", height: 30 , width: 30)),
+  Airport(name: "Schiphol Intl", city: "Amsterdam", country: "Netherlands", airportCode: "AMS", flags: Image.asset('icons/flags/png/nl.png', package: "country_icons", height: 30 , width: 30)),
   Airport(name: "Barcelona El Prat Airport", city: "Barcelona", country: "Spain", airportCode: "BCN", flags: Image.asset('icons/flags/png/es.png', package: "country_icons", height: 30 , width: 30)),
   Airport(name: "Copenhagen", city: "Copenhagen", country: "Denmark", airportCode: "CPH", flags: Image.asset('icons/flags/png/dk.png', package: "country_icons", height: 30 , width: 30)),
   Airport(name: "Rhein Main", city: "Frankfurt", country: "Germany", airportCode: "FRA", flags: Image.asset('icons/flags/png/de.png', package: "country_icons", height: 30 , width: 30)),

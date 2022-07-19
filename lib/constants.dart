@@ -1,3 +1,3 @@
 class ApiConstants {
-  static String baseUrl = 'https://apigw.singaporeair.com/api/uat/v2/flightstatus/getbyroute';
+  static String baseUrl = 'https://mockend.com/SPACEYNESS909/untitled2/flights?';
 }

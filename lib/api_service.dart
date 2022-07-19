@@ -7,17 +7,24 @@ import 'package:untitled2/constants.dart';
 import 'package:untitled2/pages/homePage.dart';
 import 'package:untitled2/models/flight.dart';
 
-class ApiService {
-  Map<String, String> requestHeaders;
-  String data;
-  ApiService({required this.requestHeaders, required this.data});
+import 'models/mockend.dart';
 
-  Future<Flight?> getUsers() async {
+class ApiService {
+
+  String origin;
+  String destination;
+  String departureDate;
+  String? arrivalDate;
+
+  ApiService({required this.origin, required this.destination, required this.departureDate, this.arrivalDate});
+
+  Future<List<Mockend>?> getUsers() async {
     try {
-      var url = Uri.parse(ApiConstants.baseUrl);
-      var response = await post(url, headers: requestHeaders, body: data);
+      var url = Uri.parse(ApiConstants.baseUrl + "originCity_contains=$origin&destinationCity_contains=$destination&scheduledDeparture_contains=$departureDate&scheduledArrival_contains=$arrivalDate");
+      print(url);
+      final response = await http.get(url);
       if (response.statusCode == 200) {
-        Flight _model = flightFromJson(response.body);
+        List<Mockend> _model = mockendFromJson(response.body);
         return _model;
       }
     } catch (e) {
