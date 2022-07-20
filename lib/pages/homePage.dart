@@ -31,6 +31,7 @@ class _HomePageState extends State<HomePage> {
   final originAirportController = TextEditingController();
   final destinationAirportController = TextEditingController();
   final arrivalDateController = TextEditingController();
+  final flightNumberController = TextEditingController();
   final _formKey = GlobalKey<FormState>(debugLabel: '_HomePageState');
   final _saved = <Mockend>[];
 
@@ -62,7 +63,7 @@ class _HomePageState extends State<HomePage> {
           child: Container(
             child: Column(
               children: [
-                const Header('Search For Flights'),
+           Header("Search For Flights"),
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Form(
@@ -164,6 +165,18 @@ class _HomePageState extends State<HomePage> {
                                 });
                               }
                             },
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 24),
+                          child: TextFormField(
+                            controller: flightNumberController,
+                            decoration: const InputDecoration(
+                              icon: Icon(Icons.airplane_ticket_rounded,
+                                  color: Colors.black),
+                              labelText: "Flight Number (Optional)",
+                              hintText: 'Enter your flight number',
+                            ),
                           ),
                         ),
                         Padding(
@@ -374,10 +387,12 @@ class _HomePageState extends State<HomePage> {
                                                     destinationAirportController
                                                         .text,
                                                     saved: _saved,
+                                                    flightNumber: flightNumberController.text,
                                                     arrivalDate: arrivalDateController
                                                         .text)));
                                   }
                                 },
+                                style: ElevatedButton.styleFrom(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50))),
                                 child: const Text('NEXT',
                                     style: TextStyle(color: Colors.white)),
                               ),

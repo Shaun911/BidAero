@@ -15,12 +15,13 @@ class ApiService {
   String destination;
   String departureDate;
   String? arrivalDate;
+  String? flightNumber;
 
-  ApiService({required this.origin, required this.destination, required this.departureDate, this.arrivalDate});
+  ApiService({required this.origin, required this.destination, required this.departureDate, this.arrivalDate, this.flightNumber});
 
   Future<List<Mockend>?> getUsers() async {
     try {
-      var url = Uri.parse(ApiConstants.baseUrl + "originCity_contains=$origin&destinationCity_contains=$destination&scheduledDeparture_contains=$departureDate&scheduledArrival_contains=$arrivalDate");
+      var url = Uri.parse(ApiConstants.baseUrl + "originCity_contains=$origin&destinationCity_contains=$destination&scheduledDeparture_contains=$departureDate&scheduledArrival_contains=$arrivalDate&flightNumber_contains=$flightNumber");
       print(url);
       final response = await http.get(url);
       if (response.statusCode == 200) {

@@ -21,6 +21,7 @@ class SearchPage extends StatefulWidget {
   final String originAirport;
   final String destinationAirport;
   final String? arrivalDate;
+  final String? flightNumber;
   final List<Mockend> saved;
 
   const SearchPage(
@@ -29,7 +30,8 @@ class SearchPage extends StatefulWidget {
       required this.originAirport,
       required this.destinationAirport,
         required this.saved,
-      this.arrivalDate})
+      this.arrivalDate,
+      this. flightNumber})
       : super(key: key);
 
   @override
@@ -53,7 +55,8 @@ class _SearchPageState extends State<SearchPage> {
     _model = (await ApiService(origin: widget.originAirport,
         destination: widget.destinationAirport,
         departureDate: widget.departureDate,
-        arrivalDate: widget.arrivalDate).getUsers())!;
+        arrivalDate: widget.arrivalDate,
+    flightNumber: widget.flightNumber).getUsers())!;
     if (_model!.isEmpty) {
       Navigator.pushAndRemoveUntil<void>(context, MaterialPageRoute<void>(
           builder: (BuildContext context) => ErrorPage()),
