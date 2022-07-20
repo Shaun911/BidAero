@@ -418,7 +418,6 @@ class _HomePageState extends State<HomePage> {
               builder: (context) =>
                   SavedPage(saved: _saved)));
     }
-
-    }
+}
 
 
