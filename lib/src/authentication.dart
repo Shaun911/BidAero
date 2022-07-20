@@ -325,6 +325,7 @@ class _RegisterFormState extends State<RegisterForm> {
                               _displayNameController.text,
                               _passwordController.text,
                             );
+                            Navigator.pushNamed(context, "homePage");
                           }
                         },
                         child: const Text('SAVE'),

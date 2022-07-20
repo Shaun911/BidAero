@@ -1,6 +1,3 @@
-import 'dart:developer';
-import 'dart:js';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -83,12 +80,12 @@ class ApplicationState extends ChangeNotifier {
   }
 
   Future<void> verifyEmail(
-    String email,
-    void Function(FirebaseAuthException e) errorCallback,
-  ) async {
+      String email,
+      void Function(FirebaseAuthException e) errorCallback,
+      ) async {
     try {
       var methods =
-          await FirebaseAuth.instance.fetchSignInMethodsForEmail(email);
+      await FirebaseAuth.instance.fetchSignInMethodsForEmail(email);
       if (methods.contains('password')) {
         _loginState = ApplicationLoginState.password;
       } else {
@@ -102,10 +99,10 @@ class ApplicationState extends ChangeNotifier {
   }
 
   Future<void> signInWithEmailAndPassword(
-    String email,
-    String password,
-    void Function(FirebaseAuthException e) errorCallback,
-  ) async {
+      String email,
+      String password,
+      void Function(FirebaseAuthException e) errorCallback,
+      ) async {
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: email,
@@ -115,7 +112,6 @@ class ApplicationState extends ChangeNotifier {
       if (e.code == 'user-not-found') {
         print('No user found for that email.');
       } else if (e.code == 'wrong-password') {
-        log(e.code);
         print('Wrong password provided for that user.');
       }
     }
@@ -150,5 +146,4 @@ class ApplicationState extends ChangeNotifier {
     FirebaseAuth.instance.signOut();
   }
 }
-
 
