@@ -413,14 +413,8 @@ class _PasswordFormState extends State<PasswordForm> {
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      TextButton(child: Text("Forgot password?"),
-                        onPressed: () async {
-
-                        }
-
-                      ),
                       const SizedBox(width: 16),
                       StyledButton(
                         text: 'Sign in',
