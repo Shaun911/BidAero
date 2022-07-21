@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'widgets.dart';
@@ -412,18 +413,32 @@ class _PasswordFormState extends State<PasswordForm> {
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
+                      TextButton(child: Text("Forgot password?"),
+                        onPressed: () async {
+
+                        }
+
+                      ),
                       const SizedBox(width: 16),
                       StyledButton(
                         text: 'Sign in',
-                        onPressed: () {
-                          if (_formKey.currentState!.validate() ) {
-                            widget.login(
-                              _emailController.text,
-                              _passwordController.text,
+                        onPressed: () async {
+                          try {
+                            await FirebaseAuth.instance.signInWithEmailAndPassword(
+                              email: _emailController.text,
+                              password: _passwordController.text,
                             );
                             Navigator.pushNamed(context, "homePage");
+                          } on FirebaseAuthException catch (e) {
+                            if (e.code == 'user-not-found') {
+                              showAlertDialog(context, 'No user found for that email.');
+                              print('No user found for that email.');
+                            } else if (e.code == 'wrong-password') {
+                              showAlertDialog(context, 'Wrong password provided for that user.');
+                              print('Wrong password provided for that user.');
+                            }
                           }
                         },
                         child: const Text('SIGN IN'),
@@ -439,5 +454,33 @@ class _PasswordFormState extends State<PasswordForm> {
       ],
     );
   }
+}
+
+showAlertDialog(BuildContext context, String error) {
+
+  // set up the button
+  Widget okButton = TextButton(
+    child: Text("OK"),
+    onPressed: () {
+      Navigator.of(context).pop();
+    },
+  );
+
+  // set up the AlertDialog
+  AlertDialog alert = AlertDialog(
+    title: Text("ERROR"),
+    content: Text("$error"),
+    actions: [
+      okButton,
+    ],
+  );
+
+  // show the dialog
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
 }
 //
