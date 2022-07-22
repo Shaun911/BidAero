@@ -43,7 +43,6 @@ class App extends StatelessWidget {
         "welcomePage": (context) => WelcomePage(),
         "homePage": (context) => HomePage(),
         "errorPage": (context) => ErrorPage(),
-
       },
     );
   }

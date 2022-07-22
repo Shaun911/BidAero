@@ -24,7 +24,7 @@ class ErrorPage extends StatelessWidget {
             const Text('ERROR',
                 style: TextStyle(color: Colors.white, fontSize: 20)),
             SizedBox(width: 15),
-            Icon(IconData(0xf712, fontFamily: 'MaterialIcons'), size: 20, color: Colors.white)
+            const Icon(const IconData(0xf712, fontFamily: 'MaterialIcons'), size: 20, color: Colors.white)
           ]))),
         body: SafeArea(
         child: Center(

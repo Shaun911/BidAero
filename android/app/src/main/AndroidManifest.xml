@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.untitled2">
    <application
-        android:label="untitled2"
+        android:label="BidAero"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

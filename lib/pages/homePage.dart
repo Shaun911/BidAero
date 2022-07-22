@@ -52,7 +52,7 @@ class _HomePageState extends State<HomePage> {
               const Text('WELCOME',
                   style: TextStyle(color: Colors.white, fontSize: 20)),
               SizedBox(width: 15),
-              Icon(IconData(0xf02d6, fontFamily: 'MaterialIcons'),
+             const Icon(const IconData(0xf02d6, fontFamily: 'MaterialIcons'),
                   size: 20, color: Colors.white)
             ])),
         actions: [

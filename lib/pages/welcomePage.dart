@@ -21,7 +21,7 @@ class WelcomePage extends StatelessWidget {
                 const Text('BIDAERO',
                     style: TextStyle(color: Colors.white, fontSize: 25)),
                 SizedBox(width: 15),
-                Icon(IconData(0xf54c, fontFamily: 'MaterialIcons'),
+                Icon(const IconData(0xf54c, fontFamily: 'MaterialIcons'),
                     size: 25, color: Colors.white)
               ]))),
       body: ListView(

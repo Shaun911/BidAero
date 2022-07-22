@@ -25,7 +25,7 @@ class ApiService {
       print(url);
       final response = await http.get(url);
       if (response.statusCode == 200) {
-        List<Mockend> _model = mockendFromJson(response.body);
+        List<Mockend>? _model = mockendFromJson(response.body);
         return _model;
       }
     } catch (e) {

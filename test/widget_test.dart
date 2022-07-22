@@ -7,24 +7,22 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:untitled2/api_service.dart';
 
 import 'package:untitled2/main.dart';
+import 'package:untitled2/models/mockend.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(const App());
+    List<Mockend>? expected = [Mockend(destinationAirportTerminal: 1, destinationCity: "Bangkok, BKK", flightNumber: "SQ64", flightStatus: 'Arrived', id: 15, originAirportGate: 'A3', originAirportTerminal: 1, originCity: 'Singapore, SIN', scheduledArrival: '2022-07-16  12:00', scheduledDeparture: '2022-07-15  08:00'),
+    Mockend(destinationAirportTerminal: 1, destinationCity: 'Bangkok, BKK', flightNumber: 'SQ112', flightStatus: 'Departed', id: 35, originAirportGate: 'C6', originAirportTerminal: 1, originCity: 'Singapore, SIN', scheduledArrival: '2022-07-16  16:00', scheduledDeparture: '2022-07-15  14:00')];
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    List<Mockend>?  actual = await (ApiService(origin: "Singapore", destination: "Bangkok", departureDate: '2022-07-15').getUsers());
+    print(actual);
+    print(expected);
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
-
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    print(expected == actual);
   });
 }
+

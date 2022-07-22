@@ -77,7 +77,7 @@ class _SearchPageState extends State<SearchPage> {
                 const Text('RESULTS',
                     style: TextStyle(color: Colors.white, fontSize: 20)),
                 SizedBox(width: 15),
-                Icon(IconData(0xf54b, fontFamily: 'MaterialIcons'),
+                Icon(const IconData(0xf54b, fontFamily: 'MaterialIcons'),
                     size: 25, color: Colors.white)
               ])),
         actions: [
