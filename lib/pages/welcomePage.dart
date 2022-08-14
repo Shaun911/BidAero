@@ -146,5 +146,3 @@ class ApplicationState extends ChangeNotifier {
     FirebaseAuth.instance.signOut();
   }
 }
-
-//
