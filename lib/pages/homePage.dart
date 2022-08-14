@@ -96,7 +96,7 @@ class _HomePageState extends State<HomePage> {
                                       .now()
                                       .year, DateTime
                                       .now()
-                                      .month, 1),
+                                      .month - 1, 1),
                                   lastDate:
                                   DateTime(DateTime
                                       .now()
