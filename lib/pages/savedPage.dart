@@ -146,6 +146,7 @@ onDismissed: (_) {
                             width: 170,
                           ),
                         ],
+                        IconButton(icon: Icon(Icons.delete), color: Colors.black, tooltip: "Swipe left to delete", onPressed: () {})
                       ),
                       SizedBox(
                         height: 20,
@@ -226,4 +227,3 @@ onDismissed: (_) {
     );
   }
 }
-//
