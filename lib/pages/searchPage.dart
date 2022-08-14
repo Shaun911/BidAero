@@ -292,4 +292,3 @@ class _SearchPageState extends State<SearchPage> {
                 SavedPage(saved: widget.saved)));
   }
 }
-//
